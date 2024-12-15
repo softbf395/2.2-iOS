@@ -21,17 +21,9 @@ async function main() {
 
     var bundle = process.env.bundle ? process.env.bundle : prompt("Enter bundle id (23 chars): ");
 
-    while (bundle.length != 23) {
-        console.log("Length isn't 23!!!\n");
-        var bundle = prompt("Bundle id: ");
-    }
 
     var base = process.env.url ? process.env.url : prompt("Enter URL (33 chars): ");
 
-    while (base.length != 33) {
-        console.log("Length isn't 33!!!\n");
-        var base = prompt("Enter URL (33 chars): ");
-    }
     var b64 = Buffer.from(base).toString('base64');
     var url = `${base}/`;
     var path = `${dir}/Payload/${name}.app`
