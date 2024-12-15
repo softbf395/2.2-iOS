@@ -33,9 +33,9 @@ jobs:
       run: |
         wget -L https://files.141412.xyz/r/base.ipa -O base.ipa
         npm install
-        echo name=${{ inputs.name }} > .env
-        echo bundle=${{ inputs.bundle }} >> .env
-        echo url=${{ inputs.url }} >> .env
+        echo "name=${{ inputs.name }}" > .env
+        echo "bundle=${{ inputs.bundle }}" >> .env
+        echo "url=${{ inputs.url }}" >> .env
         node index.js
         
         # Check if the output file exists before moving it
