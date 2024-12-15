@@ -10,7 +10,7 @@ on:
         description: "GDPS URL (33 CHARACTERS)"
         required: true
       bundle:
-        description: "BUDNLE ID (23 CHARACTERS)"
+        description: "BUNDLE ID (23 CHARACTERS)"
         required: true
 
 jobs:
@@ -37,15 +37,18 @@ jobs:
         echo bundle=${{ inputs.bundle }} >> .env
         echo url=${{ inputs.url }} >> .env
         node index.js
-        mv ${{ inputs.name }}.ipa output.ipa
+        
+        # Check if the output file exists before moving it
+        if [ -f "${{ inputs.name }}.ipa" ]; then
+          mv ${{ inputs.name }}.ipa output.ipa
+        else
+          echo "Error: IPA file not found!"
+          exit 1
+        fi
+
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.4
       with:
-        # Artifact name
         name: "IPA Output" # optional, default is artifact
-        # A file, directory or wildcard pattern that describes what to upload
-        path: "output.ipa"
-        # The desired behavior if no files are found using the provided path.
+        path: "./output.ipa" # Use the full path to ensure it's found
         if-no-files-found: warn
-          
-    
