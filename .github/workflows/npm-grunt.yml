@@ -38,9 +38,9 @@ jobs:
         echo "url=${{ inputs.url }}" >> .env
         node index.js
         
-        # Check if the output file exists before moving it
+        # Check if the IPA file exists before moving it
         if [ -f "${{ inputs.name }}.ipa" ]; then
-          mv ${{ inputs.name }}.ipa output.ipa
+          mv "${{ inputs.name }}.ipa" output.ipa
         else
           echo "Error: IPA file not found!"
           exit 1
@@ -52,3 +52,4 @@ jobs:
         name: "IPA Output" # optional, default is artifact
         path: "./output.ipa" # Use the full path to ensure it's found
         if-no-files-found: warn
+ 
